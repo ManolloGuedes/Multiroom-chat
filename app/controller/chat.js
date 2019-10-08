@@ -13,10 +13,10 @@ module.exports.startChat = (application, req, res) => {
 
   const io = application.get('io');
 
-  io.emit('startChat', {
+  io.emit('messageToCliente', {
     nickname: formData.nickname,
     msg: 'Just joined the chat',
   });
 
-  res.render('chat');
+  res.render('chat', { formData });
 };
