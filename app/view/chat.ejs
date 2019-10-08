@@ -80,22 +80,7 @@
 			
 			<div class="row participantes" id="participantes" style="display:none">
 				<div class="col-md-1"></div>
-				<div class="col-md-10">
-					<span class="participante">
-						<img src="images/ico_usuario.png" />
-						Jorge
-					</span>
-					
-					<span class="participante">
-						<img src="images/ico_usuario.png" />
-						José
-					</span>
-					
-					<span class="participante">
-						<img src="images/ico_usuario.png" />
-						Fernando
-					</span>
-				</div>
+				<div class="col-md-10" id='active-users'></div>
 				<div class="col-md-1"></div>
                 
             </div>
@@ -108,6 +93,7 @@
 						<div class="input-group">
 							<input type="text" class="form-control" placeholder="Message" id="message">
 							<input type="hidden" value="<%=formData.nickname%>" id="nickname">
+							<input type="hidden" value="0" id="nickname-on-users">
 							<span class="input-group-btn">
 								<button class="btn btn-default" type="button" id="send">></button>
 							</span>
@@ -126,13 +112,19 @@
 
 			$('#send').click(() => {
 				let nickname = $('#nickname').val();
+				
+				let updatedUserList = $('#nickname-on-users').val();
+				
 				let message = $('#message').val();
-				$('#message').val('');
-
+				
 				socket.emit('sendMessage', {
 					nickname: nickname,
 					msg: message,
+					updatedUserList: updatedUserList,
 				});
+
+				$('#nickname-on-users').val(1);
+				$('#message').val('');
 			});
 
 			socket.on('messageToCliente', (data) => {
@@ -145,6 +137,20 @@
 				`;
 
 				$('#dialogs').append(htmlDialog);
+
+				window.scrollTo(0, document.body.scrollHeight);
+			});
+
+			socket.on('addUser', (data) => {
+				let htmlUsers = '';
+				htmlUsers += `
+					<span class="participante">
+						<img src="images/ico_usuario.png" />
+						${data.nickname}
+					</span>
+				`;
+
+				$('#active-users').append(htmlUsers);
 			});
 		</script>
 		

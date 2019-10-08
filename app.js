@@ -20,7 +20,14 @@ io.on('connection', (socketConnection) => {
   });
 
   socketConnection.on('sendMessage', (data) => {
+    /* Dialog events */
     socketConnection.emit('messageToCliente', data); // sending message to sender user
     socketConnection.broadcast.emit('messageToCliente', data); // sending message to the other users
+
+    if (data.updatedUserList && parseInt(data.updatedUserList, 10) === 0) {
+      /* Client list events */
+      socketConnection.emit('addUser', { nickname: data.nickname }); // sending message to sender user
+      socketConnection.broadcast.emit('addUser', { nickname: data.nickname }); // sending message to the other users
+    }
   });
 });
