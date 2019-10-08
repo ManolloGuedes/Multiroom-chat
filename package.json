@@ -1,0 +1,26 @@
+{
+  "name": "multiroom-chat",
+  "version": "1.0.0",
+  "description": "Multiroom chat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ManolloGuedes/Multiroom-chat.git"
+  },
+  "author": "Hérlon Manollo C Guedes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ManolloGuedes/Multiroom-chat/issues"
+  },
+  "homepage": "https://github.com/ManolloGuedes/Multiroom-chat#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "consign": "^0.1.6",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-validator": "^3.2.0"
+  }
+}
